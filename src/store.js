@@ -5,7 +5,7 @@ import reducer from './reducers'
 
 const middleware = [thunk];
 
-const store = createStore(
+export const store = createStore(
     reducer,
     applyMiddleware(...middleware)
 )
