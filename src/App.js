@@ -6,7 +6,7 @@ import { fetchAjax } from './actions';
 
 class App extends Component {
   componentDidMount(){
-      const url = "http://google.com";
+      const url = "https://www.reddit.com/r/reactjs.json";
       const dispatch = this.props.dispatch;
       dispatch(fetchAjax(url))
   }
