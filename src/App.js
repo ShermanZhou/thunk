@@ -6,11 +6,14 @@ import { fetchAjax } from './actions';
 
 class App extends Component {
   componentDidMount(){
+     // THIS triggers the thunk "fetchAjax"
       const url = "https://www.reddit.com/r/reactjs.json";
       const dispatch = this.props.dispatch;
       dispatch(fetchAjax(url))
   }
   render() {
+    const requesting = this.props.ajaxReducer.requesting;
+    const dataJson =  JSON.stringify(this.props.ajaxReducer.data) ;
     return (
       <div className="App">
         <header className="App-header">
@@ -18,9 +21,9 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
-          ajax count: {this.props.count} <br/>
-          requesing: {this.props.requesting}<br/>
-          data:{this.props.data}
+          ajax count: {this.props.countReducer.count} <br />
+          {requesting && "Requesting "+this.props.ajaxReducer.url}
+          {!requesting && `url from ${this.props.ajaxReducer.url} returns ${dataJson}`}
         </p>
       </div>
     );
@@ -28,11 +31,10 @@ class App extends Component {
 }
 //map store's state to App's prop
 const mapStateToProp = state => {
-  const {count, requesting, data} = state
+  const { countReducer, ajaxReducer } = state
   return {
-    count,
-    requesting,
-    data
+    countReducer,
+    ajaxReducer
   }
 }
 

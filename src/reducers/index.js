@@ -1,7 +1,5 @@
+// ./reducers/index.js
 import {combineReducers} from 'redux'
-
-
-//reducer is (state, action)=>(state,action)
 
 const countReducer = function (state = { count: 0 }, action) {
     switch (action.type){
@@ -13,7 +11,8 @@ const countReducer = function (state = { count: 0 }, action) {
             return state;
     }
 }
-//in real case each type of ajax need their own actions.
+
+//in real case each ajax url need their own actions.
 const ajaxReducer = function (state = {requesting: true, data:null}, action) {
     switch (action.type) {
         case 'REQUEST_AJAX':
@@ -24,7 +23,8 @@ const ajaxReducer = function (state = {requesting: true, data:null}, action) {
             return state;
     }
 }
-
+//combine reducers give "namespace" of state object for each reducer
+//e.g. rootReducer = combineReducers({potato: potatoReducer, tomato: tomatoReducer})
 const rootReducer = combineReducers({
     countReducer,
     ajaxReducer
